@@ -3,14 +3,14 @@
 import vscode = require('vscode');
 
 
+//regex expressions for scope
 const ENT_BEGIN = /\s*entity\s+(\w*)\s+is.*/;
 const ARCH_BEGIN = /\s*architecture\s+(\w*)\s+of\s+(\w*)\s+is.*/;
 const CONF_BEGIN = /\s*configuration\s+(\w*)\s+of\s+(\w*)\s+is.*/;
 const SCOPE_END = /\s*end\s+(\w*).*/;
 
 
-export function guessScope(doc: vscode.TextDocument,
-                           cursorLineNum: number): VhdlScope {
+export function guessScope(doc: vscode.TextDocument, cursorLineNum: number): VhdlScope {
     return new ScopeGuesser(cursorLineNum).guess(doc);
 }
 

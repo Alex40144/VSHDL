@@ -1,4 +1,6 @@
 'use strict';
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.VhdlScope = exports.VhdlScopeKind = exports.guessScope = void 0;
 var ENT_BEGIN = /\s*entity\s+(\w*)\s+is.*/;
 var ARCH_BEGIN = /\s*architecture\s+(\w*)\s+of\s+(\w*)\s+is.*/;
 var CONF_BEGIN = /\s*configuration\s+(\w*)\s+of\s+(\w*)\s+is.*/;
@@ -7,14 +9,14 @@ function guessScope(doc, cursorLineNum) {
     return new ScopeGuesser(cursorLineNum).guess(doc);
 }
 exports.guessScope = guessScope;
+var VhdlScopeKind;
 (function (VhdlScopeKind) {
     VhdlScopeKind[VhdlScopeKind["Vhdl"] = 0] = "Vhdl";
     VhdlScopeKind[VhdlScopeKind["Entity"] = 1] = "Entity";
     VhdlScopeKind[VhdlScopeKind["Architecture"] = 2] = "Architecture";
     VhdlScopeKind[VhdlScopeKind["Configuration"] = 3] = "Configuration";
-})(exports.VhdlScopeKind || (exports.VhdlScopeKind = {}));
-var VhdlScopeKind = exports.VhdlScopeKind;
-var VhdlScope = (function () {
+})(VhdlScopeKind = exports.VhdlScopeKind || (exports.VhdlScopeKind = {}));
+var VhdlScope = /** @class */ (function () {
     function VhdlScope(kind, lineFrom) {
         this.kind = kind;
         this.children = [];
@@ -27,7 +29,7 @@ var VhdlScope = (function () {
     return VhdlScope;
 }());
 exports.VhdlScope = VhdlScope;
-var ScopeGuesser = (function () {
+var ScopeGuesser = /** @class */ (function () {
     function ScopeGuesser(cursorLineNum) {
         this.cursorLineNum = cursorLineNum;
     }

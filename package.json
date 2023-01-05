@@ -1,52 +1,218 @@
 {
-    "name": "awesome-vhdl",
+    "name": "VSHDL",
     "displayName": "VHDL",
-    "description": "Snippets, syntax highlighting, code completion and so on",
+    "description": "Snippets, syntax highlighting, code completion and formatting",
     "version": "0.0.1",
-    "publisher": "puorc",
+    "publisher": "Alex40144",
     "icon": "images/icon.png",
-    "homepage": "https://github.com/puorc/vhdl-vscode/blob/master/README.md",
-     "repository": {
+    "homepage": "https://github.com/Alex40144/VSHDL/blob/master/README.md",
+    "repository": {
         "type": "git",
-        "url": "https://github.com/puorc/vhdl-vscode"
+        "url": "https://github.com/Alex40144/VSHDL"
     },
     "engines": {
-        "vscode": "^1.5.0"
+        "vscode": "^1.73.0"
     },
     "categories": [
-        "Languages",
-        "Snippets"
+        "Other"
     ],
     "activationEvents": [
-       "onLanguage:vhdl"
+        "onLanguage:vhdl"
     ],
     "main": "./out/src/vhdlMain",
     "contributes": {
-        "languages": [{
-            "id": "vhdl",
-            "aliases": ["VHDL", "vhdl"],
-            "extensions": [".vhd",".vhdl",".vho",".vht"],
-            "configuration": "./language-configuration.json"
-        }],
-        "grammars": [{
-            "language": "vhdl",
-            "scopeName": "source.vhdl",
-            "path": "./syntaxes/vhdl.tmLanguage"
-        }],
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "VSHDL",
+                    "title": "VSHDL",
+                    "icon": "./icons/dep.svg"
+                }
+            ]
+        },
+        "views": {
+            "VSHDL": [
+                {
+                    "id": "vshdl-actions",
+                    "name": "Actions"
+                },
+                {
+                    "id": "vshdl-simulation",
+                    "name": "Simulation"
+                }
+            ]
+        },
+        "languages": [
+            {
+                "id": "vhdl",
+                "icon": {
+                    "light": "./icons/vhdl.svg",
+                    "dark": "./icons/vhdl.svg"
+                },
+                "aliases": [
+                    "VHDL",
+                    "vhdl"
+                ],
+                "extensions": [
+                    ".vhd",
+                    ".vhdl"
+                ],
+                "configuration": "./src/language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "vhdl",
+                "scopeName": "source.vhdl",
+                "path": "./src/syntaxes/vhdl.tmLanguage.json"
+            }
+        ],
         "snippets": [
             {
                 "language": "vhdl",
-                "path": "./snippets/snippets.json"
+                "path": "./src/snippets/snippets.json"
             }
-        ]
+        ],
+        "configuration": {
+            "type": "object",
+            "title": "VSHDL",
+            "properties": {
+                "vhdl.formatter.insertFinalNewline": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Insert a final new line at the end of the file when formatting. Prefer files.insertFinalNewline."
+                },
+                "vhdl.formatter.replaceByAliases": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": ""
+                },
+                "vhdl.formatter.align.all": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": ""
+                },
+                "vhdl.formatter.align.port": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": ""
+                },
+                "vhdl.formatter.align.function": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": ""
+                },
+                "vhdl.formatter.align.procedure": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": ""
+                },
+                "vhdl.formatter.align.generic": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": ""
+                },
+                "vhdl.formatter.align.mode": {
+                    "type": "string",
+                    "default": "Local",
+                    "enum": [
+                        "Local",
+                        "Global"
+                    ],
+                    "description": ""
+                },
+                "vhdl.formatter.case.keyword": {
+                    "type": "string",
+                    "default": "UpperCase",
+                    "enum": [
+                        "UpperCase",
+                        "LowerCase",
+                        "DefaultCase"
+                    ],
+                    "description": ""
+                },
+                "vhdl.formatter.case.typename": {
+                    "type": "string",
+                    "default": "UpperCase",
+                    "enum": [
+                        "UpperCase",
+                        "LowerCase",
+                        "DefaultCase"
+                    ],
+                    "description": ""
+                },
+                "vhdl.formatter.newline.port": {
+                    "type": "string",
+                    "default": "None",
+                    "enum": [
+                        "NewLine",
+                        "NoNewLine",
+                        "None"
+                    ],
+                    "description": ""
+                },
+                "vhdl.formatter.newline.then": {
+                    "type": "string",
+                    "default": "NewLine",
+                    "enum": [
+                        "NewLine",
+                        "NoNewLine",
+                        "None"
+                    ],
+                    "description": ""
+                },
+                "vhdl.formatter.newline.semicolon": {
+                    "type": "string",
+                    "default": "NewLine",
+                    "enum": [
+                        "NewLine",
+                        "NoNewLine",
+                        "None"
+                    ],
+                    "description": ""
+                },
+                "vhdl.formatter.newline.else": {
+                    "type": "string",
+                    "default": "NewLine",
+                    "enum": [
+                        "NewLine",
+                        "NoNewLine",
+                        "None"
+                    ],
+                    "description": ""
+                },
+                "vhdl.formatter.newline.generic": {
+                    "type": "string",
+                    "default": "None",
+                    "enum": [
+                        "NewLine",
+                        "NoNewLine",
+                        "None"
+                    ],
+                    "description": ""
+                }
+            }
+        }
     },
     "scripts": {
-        "vscode:prepublish": "node ./node_modules/vscode/bin/compile",
-        "compile": "node ./node_modules/vscode/bin/compile -watch -p ./",
-        "postinstall": "node ./node_modules/vscode/bin/install"
+        "build:syntax": "js-yaml ./src/syntaxes/vhdl.tmLanguage.yml > ./src/syntaxes/vhdl.tmLanguage.json",
+        "build": "npm run-script build:syntax",
+        "compile": "tsc -p ./",
+        "watch": "npm run-script build && tsc -watch -p ./",
+        "vscode:prepublish": "npm run-script build && npm run-script compile"
     },
     "devDependencies": {
-        "typescript": "^1.8.5",
-        "vscode": "^0.11.0"
+        "@types/glob": "^8.0.0",
+        "@types/mocha": "^10.0.0",
+        "@types/node": "16.x",
+        "@types/vscode": "^1.74.0",
+        "@typescript-eslint/eslint-plugin": "^5.42.0",
+        "@typescript-eslint/parser": "^5.42.0",
+        "@vscode/test-electron": "^2.2.0",
+        "eslint": "^8.26.0",
+        "glob": "^8.0.3",
+        "js-yaml": "^4.1.0",
+        "mocha": "^10.1.0",
+        "typescript": "^4.8.4"
     }
 }

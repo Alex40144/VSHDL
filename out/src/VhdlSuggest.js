@@ -1,6 +1,8 @@
 'use strict';
-var vscode = require('vscode');
-var vhdlScopeGuesser_1 = require('./vhdlScopeGuesser');
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.VhdlCompletionItemProvider = void 0;
+var vscode = require("vscode");
+var vhdlScopeGuesser_1 = require("./vhdlScopeGuesser");
 var kwLibrary = createCompletionKeyword('library');
 var kwUse = createCompletionKeyword('use');
 var kwPackage = createCompletionKeyword('package');
@@ -106,7 +108,7 @@ function createCompletionOption(option, doc) {
     item.documentation = doc;
     return item;
 }
-var VhdlCompletionItemProvider = (function () {
+var VhdlCompletionItemProvider = /** @class */ (function () {
     function VhdlCompletionItemProvider() {
     }
     VhdlCompletionItemProvider.prototype.provideCompletionItems = function (document, position, token) {
@@ -122,7 +124,7 @@ var VhdlCompletionItemProvider = (function () {
             }
             var suggestions = [];
             var textBeforeCursor = lineText.substring(0, position.character - 1);
-            var scope = vhdlScopeGuesser_1.guessScope(document, position.line);
+            var scope = (0, vhdlScopeGuesser_1.guessScope)(document, position.line);
             //console.log(scope.syntax);
             //console.log(textBeforeCursor);
             switch (scope.kind) {
