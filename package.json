@@ -1,21 +1,22 @@
 {
     "name": "vshdl",
-    "displayName": "VHDL",
+    "displayName": "VSHDL",
     "description": "Snippets, syntax highlighting, code completion and formatting",
     "version": "0.0.1",
     "publisher": "Alex40144",
-    "icon": "images/icon.png",
     "homepage": "https://github.com/Alex40144/VSHDL/blob/master/README.md",
     "repository": {
         "type": "git",
         "url": "https://github.com/Alex40144/VSHDL"
     },
     "engines": {
-        "vscode": "^1.73.0"
+        "vscode": "^1.74.0"
     },
     "categories": [
         "Other",
-        "Formatters"
+        "Formatters",
+        "Snippets",
+        "Programming Languages"
     ],
     "activationEvents": [
         "onLanguage:vhdl"
@@ -58,7 +59,7 @@
                     ".vhd",
                     ".vhdl"
                 ],
-                "configuration": "./src/language-configuration.json"
+                "configuration": "./src/vhdl-language-configuration.json"
             }
         ],
         "grammars": [

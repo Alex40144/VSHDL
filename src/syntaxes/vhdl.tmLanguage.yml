@@ -19,7 +19,6 @@ repository:
       - include: "#package_declaration"
       # Secondary Unit
       - include: "#architecture_body"
-      - include: "#package_body"
 
   # --------------------------------------------------
   # Context Clause

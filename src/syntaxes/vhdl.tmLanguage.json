@@ -41,9 +41,6 @@
         },
         {
           "include": "#architecture_body"
-        },
-        {
-          "include": "#package_body"
         }
       ]
     },
