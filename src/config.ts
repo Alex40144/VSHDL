@@ -60,7 +60,7 @@ function getIndentation(options: vscode.FormattingOptions) {
 	return " ".repeat(tabSize);
 }
 
-export function getConfig(options: vscode.FormattingOptions): VHDLFormatter.settings {
+export function getConfig(options: vscode.FormattingOptions): VHDLFormatter.BeautifierSettings {
 	if (!options) options = { insertSpaces: false, tabSize: 4 };
 
 	const indentation = getIndentation(options);
@@ -106,5 +106,5 @@ export function getConfig(options: vscode.FormattingOptions): VHDLFormatter.sett
 	}
 
 	const alignSettings = new VHDLFormatter.signAlignSettings(signAlignKeywords.length > 0, alignAllSign, signAlignMode, signAlignKeywords)
-	return new VHDLFormatter.settings(removeComments, removeReports, checkAlias, alignSettings, keywordCase, typenameCase, indentation, newLineSettings, endOfLine, addNewLine);
+	return new VHDLFormatter.BeautifierSettings(removeComments, removeReports, checkAlias, alignSettings, keywordCase, typenameCase, indentation, newLineSettings, endOfLine, addNewLine);
 }

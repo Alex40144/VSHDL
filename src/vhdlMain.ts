@@ -12,20 +12,21 @@ function getRange(document: vscode.TextDocument) {
 	return new vscode.Range(start, end);
 }
 
-export function activate(ctx: vscode.ExtensionContext): void {
-    vscode.languages.registerDocumentFormattingEditProvider('vhdl', {
-        provideDocumentFormattingEdits(document: vscode.TextDocument, options: vscode.FormattingOptions): vscode.TextEdit[] {
-			var range = getRange(document)
-			var content = document.getText(range)
-			var result: vscode.TextEdit[] = []
-			var settings = config.getConfig(options)
-			var formatted = Formatter.format(content, settings)
-			if(formatted){
-				result.push(new vscode.TextEdit(range, formatted))
+export function activate(context: vscode.ExtensionContext) {
+	console.log("test")
+	vscode.languages.registerDocumentFormattingEditProvider('vhdl', {
+		provideDocumentFormattingEdits(document: vscode.TextDocument, options: vscode.FormattingOptions): vscode.TextEdit[] {
+			var range = getRange(document);
+			var content = document.getText(range);
+			var result: vscode.TextEdit[] = [];
+			var beautifierSettings = config.getConfig(options);
+			var formatted = Formatter.beautify(content, beautifierSettings);
+			if (formatted) {
+				result.push(new vscode.TextEdit(range, formatted));
 			}
 			return result;
-        }
-    });
+		}
+	});
 }
 
 // this method is called when your extension is deactivated

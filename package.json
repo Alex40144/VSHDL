@@ -1,5 +1,5 @@
 {
-    "name": "VSHDL",
+    "name": "vshdl",
     "displayName": "VHDL",
     "description": "Snippets, syntax highlighting, code completion and formatting",
     "version": "0.0.1",
@@ -14,12 +14,13 @@
         "vscode": "^1.73.0"
     },
     "categories": [
-        "Other"
+        "Other",
+        "Formatters"
     ],
     "activationEvents": [
         "onLanguage:vhdl"
     ],
-    "main": "./out/src/vhdlMain",
+    "main": "./out/vhdlMain",
     "contributes": {
         "viewsContainers": {
             "activitybar": [
@@ -33,8 +34,8 @@
         "views": {
             "VSHDL": [
                 {
-                    "id": "vshdl-actions",
-                    "name": "Actions"
+                    "id": "vshdl-formatter",
+                    "name": "formatter"
                 },
                 {
                     "id": "vshdl-simulation",
