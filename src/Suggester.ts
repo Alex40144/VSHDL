@@ -1,7 +1,7 @@
 'use strict';
 
 import vscode = require('vscode');
-import { guessScope, VhdlScopeKind } from './vhdlScopeGuesser';
+import { guessScope, VhdlScopeKind } from './ScopeGuesser';
 
 let kwLibrary = createCompletionKeyword('library');
 let kwUse = createCompletionKeyword('use');
@@ -129,15 +129,10 @@ function createCompletionOption(option: string, doc?: string): vscode.Completion
 
 export class VhdlCompletionItemProvider implements vscode.CompletionItemProvider {
 
-    public provideCompletionItems(document: vscode.TextDocument,
-                                  position: vscode.Position,
-                                  token: vscode.CancellationToken)
-            : Thenable<vscode.CompletionItem[]> {
-        
+    public provideCompletionItems(document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken) : Thenable<vscode.CompletionItem[]> {
+        let VSHDL = vscode.window.createOutputChannel("VSHDL");
         return new Promise<vscode.CompletionItem[]>((resolve, reject) => {
-            let filename = document.fileName;
             let lineText = document.lineAt(position.line).text;
-
             if (lineText.match(/^\s*\-\-/)) {
                 return resolve([]);
             }
@@ -151,8 +146,8 @@ export class VhdlCompletionItemProvider implements vscode.CompletionItemProvider
 
             let textBeforeCursor = lineText.substring(0, position.character - 1)
             let scope = guessScope(document, position.line);
-            //console.log(scope.syntax);
-            //console.log(textBeforeCursor);
+            console.log(scope);
+            console.log(textBeforeCursor);
 
             switch (scope.kind) {
                 case VhdlScopeKind.Vhdl: {

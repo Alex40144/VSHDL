@@ -4,6 +4,7 @@
 import * as vscode from 'vscode';
 import * as config from './config'
 import * as Formatter from './Formatter/Formatter'
+import * as Suggestor from './Suggester'
 
 function getRange(document: vscode.TextDocument) {
 	var start = new vscode.Position(0, 0);
@@ -13,9 +14,10 @@ function getRange(document: vscode.TextDocument) {
 }
 
 export function activate(context: vscode.ExtensionContext) {
-	console.log("test")
+	context.subscriptions.push(vscode.languages.registerCompletionItemProvider({language: 'vhdl', scheme: 'file'}, new Suggestor.VhdlCompletionItemProvider(), '.'))
 	vscode.languages.registerDocumentFormattingEditProvider('vhdl', {
 		provideDocumentFormattingEdits(document: vscode.TextDocument, options: vscode.FormattingOptions): vscode.TextEdit[] {
+			console.log("test")
 			var range = getRange(document);
 			var content = document.getText(range);
 			var result: vscode.TextEdit[] = [];
