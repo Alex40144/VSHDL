@@ -14,7 +14,7 @@ function getRange(document: vscode.TextDocument) {
 }
 
 export function activate(context: vscode.ExtensionContext) {
-	context.subscriptions.push(vscode.languages.registerCompletionItemProvider({language: 'vhdl', scheme: 'file'}, new Suggestor.VhdlCompletionItemProvider(), '.'))
+	context.subscriptions.push(vscode.languages.registerCompletionItemProvider({language: 'vhdl', scheme: 'file'}, new Suggestor.VhdlCompletionItemProvider(), '.', ' '))
 	vscode.languages.registerDocumentFormattingEditProvider('vhdl', {
 		provideDocumentFormattingEdits(document: vscode.TextDocument, options: vscode.FormattingOptions): vscode.TextEdit[] {
 			console.log("test")

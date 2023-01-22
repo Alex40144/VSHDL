@@ -15,6 +15,7 @@ let kwEnd = createCompletionKeyword('end');
 let kwMap = createCompletionKeyword('map');
 let kwOf = createCompletionKeyword('of');
 let kwFor = createCompletionKeyword('for');
+let kwAll = createCompletionKeyword('all');
 
 let operatorOptions = [
     createCompletionOption('abs'),
@@ -85,6 +86,19 @@ let entityOptions = [
     createCompletionOption('port'),
 ];
 
+let libraryOptions = [
+    createCompletionOption('ieee'),
+];
+
+let ieeePackages = [
+    createCompletionOption('std_logic_1164'),
+    createCompletionOption('numeric_std'),
+    createCompletionOption('std_logic_signed'),
+    createCompletionOption('std_logic_unsigned'),
+    createCompletionOption('std_logic_arith'),
+    createCompletionOption('std_logic_misc'),
+];
+
 let scalaTypes = [
     createCompletionKeyword('bit', `The bit data type can only have the value 0 or 1.`),
     createCompletionKeyword('bit_vector', `
@@ -133,37 +147,43 @@ export class VhdlCompletionItemProvider implements vscode.CompletionItemProvider
         let VSHDL = vscode.window.createOutputChannel("VSHDL");
         return new Promise<vscode.CompletionItem[]>((resolve, reject) => {
             let lineText = document.lineAt(position.line).text;
-            if (lineText.match(/^\s*\-\-/)) {
+            if (lineText.match(/^\s*\-\-/)) { //ignore comments
                 return resolve([]);
             }
 
-            let inString = false;
-            if ((lineText.substring(0, position.character).match(/\"/g) || []).length % 2 === 1) {
-                inString = true;
+            if ((lineText.substring(0, position.character).match(/\"/g) || []).length % 2 === 1) { //ignore string
+                return resolve([]);
             }
 
             let suggestions = [];
 
-            let textBeforeCursor = lineText.substring(0, position.character - 1)
+            let textBeforeCursor = lineText.substring(0, position.character)
             let scope = guessScope(document, position.line);
-            console.log(scope);
-            console.log(textBeforeCursor);
 
             switch (scope.kind) {
                 case VhdlScopeKind.Vhdl: {
-                    suggestions.push(kwArchitecture);
-                    suggestions.push(kwBegin);
-                    suggestions.push(kwConfiguration);
-                    suggestions.push(kwEnd);
-                    suggestions.push(kwEntity);
-                    suggestions.push(kwIs);
-                    suggestions.push(kwPackage);
-                    suggestions.push(kwUse);
-                    suggestions.push(kwLibrary);
+                    
+                    if (textBeforeCursor.match(/(library|use)\s*$/)){
+                        suggestions.push(...libraryOptions)
+                    } else if (textBeforeCursor.match(/ieee\.$/)){
+                        suggestions.push(...ieeePackages)
+                    } else if (textBeforeCursor.match(/\.$/)){
+                        suggestions.push(kwAll)
+                    } else if (textBeforeCursor.match(/^n/) == null){
+                        suggestions.push(kwArchitecture);
+                        suggestions.push(kwBegin);
+                        suggestions.push(kwConfiguration);
+                        suggestions.push(kwEnd);
+                        suggestions.push(kwEntity);
+                        suggestions.push(kwIs);
+                        suggestions.push(kwPackage);
+                        suggestions.push(kwUse);
+                        suggestions.push(kwLibrary);
+                    }
                     break;
                 }
                 case VhdlScopeKind.Entity: {
-                    if (textBeforeCursor.match(/^\s*\w*$/)) {
+                    if (textBeforeCursor.match(/^\s*\w*/)) {
                         suggestions.push(...entityOptions);
                         suggestions.push(...portTypeOptions);
                         suggestions.push(kwBegin);
@@ -194,7 +214,6 @@ export class VhdlCompletionItemProvider implements vscode.CompletionItemProvider
                     break;
                 }
             }
-
             return resolve(suggestions);
         });
     }
