@@ -17,7 +17,6 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(vscode.languages.registerCompletionItemProvider({language: 'vhdl', scheme: 'file'}, new Suggestor.VhdlCompletionItemProvider(), '.', ' '))
 	vscode.languages.registerDocumentFormattingEditProvider('vhdl', {
 		provideDocumentFormattingEdits(document: vscode.TextDocument, options: vscode.FormattingOptions): vscode.TextEdit[] {
-			console.log("test")
 			var range = getRange(document);
 			var content = document.getText(range);
 			var result: vscode.TextEdit[] = [];
