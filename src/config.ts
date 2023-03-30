@@ -28,9 +28,9 @@ enum AlignMode {
 }
 
 enum CaseType {
-	UpperCase,// = "UpperCase",
-	LowerCase,// = "LowerCase",
-	DefaultCase,// = "DefaultCase"
+	UpperCase,// = "UPPERCASE",
+	LowerCase,// = "lowercase",
+	CamelCase,// = "Camelcase"
 }
 
 enum NewLineConfig {

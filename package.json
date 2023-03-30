@@ -76,7 +76,6 @@
             }
         ],
         "configuration": {
-            "type": "object",
             "title": "VSHDL",
             "properties": {
                 "vhdl.formatter.insertFinalNewline": {
@@ -125,21 +124,21 @@
                 },
                 "vhdl.formatter.case.keyword": {
                     "type": "string",
-                    "default": "UpperCase",
+                    "default": "lowercase",
                     "enum": [
-                        "UpperCase",
-                        "LowerCase",
-                        "DefaultCase"
+                        "UPPERCASE",
+                        "lowercase",
+                        "CamelCase"
                     ],
                     "description": ""
                 },
                 "vhdl.formatter.case.typename": {
                     "type": "string",
-                    "default": "UpperCase",
+                    "default": "lowercase",
                     "enum": [
-                        "UpperCase",
-                        "LowerCase",
-                        "DefaultCase"
+                        "UPPERCASE",
+                        "lowercase",
+                        "CamelCase"
                     ],
                     "description": ""
                 },
